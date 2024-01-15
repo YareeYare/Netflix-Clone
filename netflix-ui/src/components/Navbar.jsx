@@ -113,7 +113,7 @@ const Container = styled.div`
                         }
                         svg {
                               color: #f34242;
-                              font-size: 1.2rem;
+                              font-size: 1.55rem;
                         }
                   }
 

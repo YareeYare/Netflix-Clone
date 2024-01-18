@@ -8,12 +8,31 @@ import { BsCheck } from 'react-icons/bs'
 import { AiOutlinePlus } from 'react-icons/ai' 
 import { BiChevronDown } from 'react-icons/bi' 
 
+import { firebaseAuth } from '../utils/firebase-config'
+import { onAuthStateChanged } from 'firebase/auth'
+import axios from 'axios'
+
 export default React.memo(
 
       function Card({ movieData, isLiked = false }){
             const navigate = useNavigate()
 
             const [isHovered, setIsHovered] = useState(false)
+            const [email, setEmail] = useState(undefined)
+
+            // This is provided by FireBase
+            onAuthStateChanged(firebaseAuth, (currentUser) => {
+                  if (currentUser) setEmail(currentUser.email)
+                  else navigate('/login')
+            });
+
+            const addToList = async () => {
+                  try {
+                        await axios.post('http://localhost:5001/api/user/add', { email, data:movieData })
+                  } catch(err) {
+                        console.log( err )
+                  }
+            }
 
             return (
                   <Container
@@ -47,7 +66,7 @@ export default React.memo(
                                                                   isLiked ? (
                                                                         <BsCheck title='Remove from list' />
                                                                   ) : (
-                                                                        <AiOutlinePlus title='Add to my list' />
+                                                                        <AiOutlinePlus title='Add to my list' onClick={addToList} />
                                                                   )
                                                             }
                                                       </div>

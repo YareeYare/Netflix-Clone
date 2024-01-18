@@ -11,6 +11,8 @@ import { BiChevronDown } from 'react-icons/bi'
 import { firebaseAuth } from '../utils/firebase-config'
 import { onAuthStateChanged } from 'firebase/auth'
 import axios from 'axios'
+import { removeFromLikedMovies } from '../store'
+import { useDispatch } from 'react-redux'
 
 export default React.memo(
 
@@ -33,6 +35,8 @@ export default React.memo(
                         console.log( err )
                   }
             }
+
+            const dispatch = useDispatch()
 
             return (
                   <Container
@@ -64,7 +68,7 @@ export default React.memo(
                                                             <RiThumbDownFill title='Dislike' />
                                                             {
                                                                   isLiked ? (
-                                                                        <BsCheck title='Remove from list' />
+                                                                        <BsCheck title='Remove from list' onClick={()=>dispatch(removeFromLikedMovies({ movieId: movieData.id, email }))} />
                                                                   ) : (
                                                                         <AiOutlinePlus title='Add to my list' onClick={addToList} />
                                                                   )

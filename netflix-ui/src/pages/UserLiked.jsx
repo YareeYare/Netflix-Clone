@@ -11,48 +11,50 @@ import Navbar from '../components/Navbar'
 import SelectGenre from '../components/SelectGenre'
 import Card from '../components/Card'
 
-const UserLiked = () => {
-      const navigate = useNavigate()
+export default React.memo(
+      function UserLiked(){
+            const navigate = useNavigate()
 
-      const [ isScrolled, setIsScrolled ] = useState(false)
-    
-      const movies = useSelector((state) => state.netflix.movies )
-
-      const [email, setEmail] = useState(undefined)
-
-      // This is provided by FireBase
-      onAuthStateChanged(firebaseAuth, (currentUser) => {
-            if (currentUser) setEmail(currentUser.email)
-            else navigate('/login')
-      });
-    
-      const dispatch = useDispatch()
+            const [ isScrolled, setIsScrolled ] = useState(false)
       
-      useEffect(() => {
-            if(email) { 
-                  dispatch(getUserLikedMovies(email))
-            }
-      },[email])
-    
-      window.onscroll = () => {
-        setIsScrolled( window.scrollY === 0 ? false : true )
-        return () => (window.onscroll = null)
-      }
+            const movies = useSelector((state) => state.netflix.movies )
 
-      return (
-            <Container>
-                  <Navbar isScrolled={isScrolled} />
-                  <div className="content flex column">
-                        <h1>My List</h1>
-                        <div className="grid flex">
-                              { movies && movies.map( (movie,index) => {
-                                    return (<Card movieData={movie} index={index} key={movie.id} isLiked={true} />)
-                              })}
+            const [email, setEmail] = useState(undefined)
+
+            // This is provided by FireBase
+            onAuthStateChanged(firebaseAuth, (currentUser) => {
+                  if (currentUser) setEmail(currentUser.email)
+                  else navigate('/login')
+            });
+      
+            const dispatch = useDispatch()
+            
+            useEffect(() => {
+                  if(email) { 
+                        dispatch(getUserLikedMovies(email))
+                  }
+            },[email])
+      
+            window.onscroll = () => {
+            setIsScrolled( window.scrollY === 0 ? false : true )
+            return () => (window.onscroll = null)
+            }
+
+            return (
+                  <Container>
+                        <Navbar isScrolled={isScrolled} />
+                        <div className="content flex column">
+                              <h1>My List</h1>
+                              <div className="grid flex">
+                                    { movies && movies.map( (movie,index) => {
+                                          return (<Card movieData={movie} index={index} key={movie.id} isLiked={true} />)
+                                    })}
+                              </div>
                         </div>
-                  </div>
-            </Container>
-      )
-}
+                  </Container>
+            )
+      }
+)
 
 const Container = styled.div`
       .content {
@@ -70,5 +72,3 @@ const Container = styled.div`
             }
       }
 `
-
-export default UserLiked

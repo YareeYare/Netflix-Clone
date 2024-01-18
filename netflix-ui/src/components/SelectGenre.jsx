@@ -23,6 +23,7 @@ const Select = styled.select`
       font-size: 1.2rem;
       background-color: rgba(0, 0, 0, 0.4);
       color: white;
+      &:focus { outline: none; }
 `
 
 export default SelectGenre

@@ -52,6 +52,11 @@ export const fetchDataByGenre = createAsyncThunk('netflix/genre', async ({genre,
       return getRawData(`${TMDB_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}`, genres, true )
 })
 
+export const getUserLikedMovies = createAsyncThunk('netflix/getLiked', async ( email ) => {
+      const {data: {movies} } = await axios.get(`http://localhost:5001/api/user/liked/${email}`)
+      return movies
+})
+
 const NetflixSlice = createSlice({
       name: 'Netflix',
       initialState,
@@ -65,6 +70,9 @@ const NetflixSlice = createSlice({
                         state.movies = action.payload
                   })
                   .addCase( fetchDataByGenre.fulfilled, (state,action) => {
+                        state.movies = action.payload
+                  })
+                  .addCase( getUserLikedMovies.fulfilled, (state,action) => {
                         state.movies = action.payload
                   })
       },

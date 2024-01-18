@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom'
 import Player from './pages/Player'
 import Movies from './pages/Movies'
 import TVShows from './pages/TVShows'
+import UserLiked from './pages/UserLiked'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
             <Route path='/player' element={<Player/>} />
             <Route path='/movies' element={<Movies/>} />
             <Route path='/tv' element={<TVShows/>} />
+            <Route path='/mylist' element={<UserLiked/>} />
             <Route path="/" element={<Netflix/>} />
         </Routes>
   )

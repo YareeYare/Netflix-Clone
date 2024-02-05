@@ -30,7 +30,7 @@ export default React.memo(
 
             const addToList = async () => {
                   try {
-                        await axios.post('http://localhost:5001/api/user/add', { email, data:movieData })
+                        await axios.post('https://netflix-clone-gv6u.onrender.com/api/user/add', { email, data:movieData })
                   } catch(err) {
                         console.log( err )
                   }

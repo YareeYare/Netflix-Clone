@@ -45,9 +45,8 @@ module.exports.removeFromLikedMovies = async(req,res) => {
             const user = await User.findOne({ email })
             if( user ){
                   const { likedMovies } = user
+                  console.log(likedMovies,'--liked Movies')
                   const movieIndex = likedMovies.findIndex( ({ id }) => (id === movieId) )
-
-                  if( !movieIndex ) res.status(400).send({ msg : 'Movie not found' })
 
                   likedMovies.splice( movieIndex, 1 ) // Deleting that movie/show
 

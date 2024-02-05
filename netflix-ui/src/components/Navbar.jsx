@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import logo from '../assets/logo.png'
 import { FaSignOutAlt, FaSearch } from 'react-icons/fa'
@@ -9,6 +9,11 @@ import { onAuthStateChanged } from 'firebase/auth'
 
 const Navbar = ({ isScrolled }) => {
       const navigate = useNavigate();
+      const location = useLocation();
+
+      const isActive = (path) => {
+            return location.pathname === path ? { color: '#f34242' } : { color: 'white' };
+      };
 
       const links = [
             { name: 'Home', link: '/' },
@@ -35,7 +40,7 @@ const Navbar = ({ isScrolled }) => {
                                     {
                                           links.map( ({name, link}) => {
                                                 return(
-                                                      <li key={name} ><Link to={link}>{name}</Link></li>
+                                                      <li key={name} ><Link to={link} style={isActive(link)} >{name}</Link></li>
                                                 )
                                           })
                                     }

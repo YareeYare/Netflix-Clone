@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { fetchMovies, getGenres, getUserLikedMovies } from '../store'
+import { getUserLikedMovies } from '../store'
 import { firebaseAuth } from '../utils/firebase-config'
 import { onAuthStateChanged } from 'firebase/auth'
 import styled from 'styled-components'
-import NotAvailable from '../components/NotAvailable'
-import Slider from '../components/Slider'
 import Navbar from '../components/Navbar'
-import SelectGenre from '../components/SelectGenre'
 import Card from '../components/Card'
 
 export default React.memo(

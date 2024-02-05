@@ -18,15 +18,12 @@ const Login = () => {
     try {
       const { email, password } = formValues;
       await signInWithEmailAndPassword(firebaseAuth, email, password); // This is provided by FireBase
+      navigate("/");
     } catch (err) {
+      alert("Invalid Email or Password")
       console.log(err);
     }
   };
-
-  // This is provided by FireBase
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (currentUser) navigate("/");
-  });
 
   return (
     // showPassword se error aa rha hai ek idhar.

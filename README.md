@@ -4,7 +4,7 @@
 Welcome to the Netflix Clone project! This full-stack web application is your gateway to a familiar streaming experience, recreated using modern technologies. With a blend of React.js, Node.js, MongoDB, Express.js, Redux Toolkit, Firebase, and styled-components, along with data fetched from the TMDB API, users can immerse themselves in a diverse selection of movies and TV shows.
 ## Live Demo
 
-Explore the live demo of the [Netflix Clone](https://netflix-c10ne.netlify.app/)
+Explore the live demo of the [Netflix Clone](https://spontaneous-tanuki-5520da.netlify.app)
 
 ## Getting Started
 
